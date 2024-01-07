@@ -25,7 +25,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header p-2">
-                <a href="admin_mgmt.php?page=create" class="btn btn-sm bg-primary ml-2"><i class="fa-sharp fa-solid fa-square-plus"></i> New Administrator</a>
+                <a href="admin_mgmt.php?page=create" class="btn btn-sm bg-primary ml-2" <?php if($user_type == 'Staff') { echo 'style="pointer-events: none;opacity: .5;"'; } ?> ><i class="fa-sharp fa-solid fa-square-plus"></i> New Administrator</a>
 
                 <div class="card-tools mr-1 mt-3">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
