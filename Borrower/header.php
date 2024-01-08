@@ -71,7 +71,7 @@
         <div class="container">
           <a href="index.php" class="navbar-brand">
             <img src="../images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light"><b>LAKASA</b></span>
+            <span class="brand-text font-weight-light" style="<?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'color: #007bff;' : ''; ?>"><b>LAKASA</b></span>
           </a>
           <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -91,10 +91,14 @@
                 </ul>
               </li> -->
               <li class="nav-item">
-                <a href="borrowed_book.php" class="nav-link">Borrowed Books</a>
+               <a href="all_book.php" class="nav-link" style="<?php echo (basename($_SERVER['PHP_SELF']) == 'all_book.php') ? 'color: #007bff;' : ''; ?>">All Books</a>
+
               </li>
               <li class="nav-item">
-                <a href="log_history.php" class="nav-link">Log history</a>
+                <a href="borrowed_book.php" class="nav-link" style="<?php echo (basename($_SERVER['PHP_SELF']) == 'borrowed_book.php') ? 'color: #007bff;' : ''; ?>">Borrowed Books</a>
+              </li>
+              <li class="nav-item">
+                <a href="log_history.php" class="nav-link" style="<?php echo (basename($_SERVER['PHP_SELF']) == 'log_history.php') ? 'color: #007bff;' : ''; ?>">Log history</a>
               </li>
             </ul>
             <!-- SEARCH FORM -->

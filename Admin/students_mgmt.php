@@ -104,7 +104,7 @@
                     <textarea name="birthplace" id="" cols="30" rows="1" class="form-control" required placeholder="Place of Birth"></textarea>
                   </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <span class="text-dark"><b>Sex</b></span>
                     <select class="form-control" name="gender" required>
@@ -114,7 +114,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <span class="text-dark"><b>Civil Status</b></span>
                     <select class="form-control" name="civilstatus" required>
@@ -126,13 +126,13 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-none">
                   <div class="form-group">
                     <span class="text-dark"><b>Profession/ Occupation</b></span>
-                    <input type="text" class="form-control"  placeholder="Profession/ Occupation" name="occupation" required>
+                    <input type="text" class="form-control"  placeholder="Profession/ Occupation" name="occupation" value="Student" required>
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <span class="text-dark"><b>Religion</b></span>
                     <select class="form-control" name="religion" required>
@@ -405,7 +405,7 @@
                     <textarea name="birthplace" id="" cols="30" rows="1" class="form-control" required placeholder="Place of Birth"><?php echo $row['birthplace']; ?></textarea>
                   </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <?php
                     $genders = ['Male', 'Female'];
@@ -420,7 +420,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <?php
                     $statuses = ['Single', 'Married', 'Widow/ER', 'Separated'];
@@ -435,13 +435,13 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-none">
                   <div class="form-group">
                     <span class="text-dark"><b>Profession/ Occupation</b></span>
                     <input type="text" class="form-control"  placeholder="Profession/ Occupation" name="occupation" required value="<?php echo $row['occupation']; ?>">
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
                     <?php
                     $religions = ['Roman Catholic', 'Iglesia Ni Cristo', 'Evangelical Christianity', 'Islam', 'Protestants', 'Seventh-day Adventism', 'Aglipayan', 'Bible Baptist Church', 'United Church of Christ in the Philippines', "Jehovah's Witnesses", 'Buddhist', 'Methodist', 'Hindu', 'Judaism', 'Ang Dating Daan', 'Other Religion'];

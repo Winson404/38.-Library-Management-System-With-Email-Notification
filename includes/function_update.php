@@ -144,24 +144,92 @@
 
 	// UPDATE BORROWED BOOK STATUS - BORROWED_BOOK.PHP
 	function update_borrowed_book_status($conn, $borrow_ID, $status, $reason_reject, $page) {
+		$fetch = mysqli_query($conn, "SELECT * FROM borrowed_books WHERE borrow_ID=$borrow_ID");
+		$row = mysqli_fetch_array($fetch);
+		$book_ID = $row['book_ID'];
+
+		$date_today = date('Y-m-d');
 	    $column = '';
 	    if ($status == 1) {
 	        $column = 'date_approve';
+	        $fetch2 = mysqli_query($conn, "SELECT * FROM borrowed_books WHERE borrow_ID=$borrow_ID");
+	        $row2 = mysqli_fetch_array($fetch2);
+			$existing_status = $row2['status'];
+			if($existing_status != 0) { 
+				displayErrorMessage("Only pending books can be approved.", $page);    
+			}
+			$updateStmt = mysqli_prepare($conn, "UPDATE borrowed_books SET status=?, reason_reject=?, $column=? WHERE borrow_ID = ?");
+		    mysqli_stmt_bind_param($updateStmt, 'isss', $status, $reason_reject, $date_today, $borrow_ID);
+		    $update = mysqli_stmt_execute($updateStmt);
+		    displayUpdateMessage($update, $page);
 	    } elseif ($status == 2) {
 	        $column = 'date_released';
+	        $fetch2 = mysqli_query($conn, "SELECT * FROM borrowed_books WHERE borrow_ID=$borrow_ID");
+	        $row2 = mysqli_fetch_array($fetch2);
+			$existing_status = $row2['status'];
+			if($existing_status != 1) { 
+				displayErrorMessage("Only approved records will be released", $page);    
+			}
+			$updateStmt = mysqli_prepare($conn, "UPDATE borrowed_books SET status=?, reason_reject=?, $column=? WHERE borrow_ID = ?");
+		    mysqli_stmt_bind_param($updateStmt, 'isss', $status, $reason_reject, $date_today, $borrow_ID);
+		    $update = mysqli_stmt_execute($updateStmt);
+		    if($update) {
+		    	$updateStmt = mysqli_prepare($conn, "UPDATE books SET qty_available=qty_available-1 WHERE book_ID = ?");
+			    mysqli_stmt_bind_param($updateStmt, 'i', $book_ID);
+			    $update2 = mysqli_stmt_execute($updateStmt);
+			    displayUpdateMessage($update2, $page);
+		    } else {
+		    	displayErrorMessage("Error", $page);
+		    }
 	    } elseif ($status == 3) {
-	        $column = 'date_rejected';
+	        $column = 'date_rejected';     
+	        $fetch2 = mysqli_query($conn, "SELECT * FROM borrowed_books WHERE borrow_ID=$borrow_ID");
+	        $row2 = mysqli_fetch_array($fetch2);
+			$existing_status = $row2['status'];
+			if($existing_status != 0) { 
+				displayErrorMessage("Only pending books can be rejected.", $page);    
+			}
+			$updateStmt = mysqli_prepare($conn, "UPDATE borrowed_books SET status=?, reason_reject=?, $column=? WHERE borrow_ID = ?");
+		    mysqli_stmt_bind_param($updateStmt, 'isss', $status, $reason_reject, $date_today, $borrow_ID);
+		    $update = mysqli_stmt_execute($updateStmt);
+			displayUpdateMessage($update, $page);
 	    } else {
 	    	// STATUS THAT IS 4 OR 6
 	        $column = 'date_returned';
-	    }
-	    $date_today = date('Y-m-d');
+	        $fetch2 = mysqli_query($conn, "SELECT * FROM borrowed_books WHERE borrow_ID=$borrow_ID");
+	        $row2 = mysqli_fetch_array($fetch2);
+			$existing_status = $row2['status'];
+			if($existing_status == 0) {
+				displayErrorMessage("Books is not yet approved", $page);
+			} 
+			if($existing_status == 1) {
+				displayErrorMessage("Books is not yet released", $page);
+			} 
+			if($existing_status == 3) {
+				displayErrorMessage("Books is was already rejected", $page);
+			} 
 
-	    $updateStmt = mysqli_prepare($conn, "UPDATE borrowed_books SET status=?, reason_reject=?, $column=? WHERE borrow_ID = ?");
-	    mysqli_stmt_bind_param($updateStmt, 'isss', $status, $reason_reject, $date_today, $borrow_ID);
-	    $update = mysqli_stmt_execute($updateStmt);
-	    displayUpdateMessage($update, $page);
+			if($existing_status == 4 || $existing_status == 6) {
+				displayErrorMessage("Books was already returned", $page);
+			} 
+			$updateStmt = mysqli_prepare($conn, "UPDATE borrowed_books SET status=?, reason_reject=?, $column=? WHERE borrow_ID = ?");
+		    mysqli_stmt_bind_param($updateStmt, 'isss', $status, $reason_reject, $date_today, $borrow_ID);
+		    $update = mysqli_stmt_execute($updateStmt);
+		    if($update) {
+		    	$updateStmt = mysqli_prepare($conn, "UPDATE books SET qty_available=qty_available+1 WHERE book_ID = ?");
+			    mysqli_stmt_bind_param($updateStmt, 'i', $book_ID);
+			    $update = mysqli_stmt_execute($updateStmt);
+			    displayUpdateMessage($update, $page);
+		    } else {
+		    	displayErrorMessage("Error", $page);
+		    }
+	    }
+	    
+
+
 	}
+
+
 
 
 

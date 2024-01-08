@@ -126,7 +126,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>Profession/ Occupation</b></span>
-                              <input type="text" class="form-control"  placeholder="Profession/ Occupation" name="occupation" required>
+                              <input type="text" class="form-control"  placeholder="Profession/ Occupation" name="occupation" id="occupation" required>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -377,6 +377,7 @@
 
         function updateForm() {
             var userType = $('#user_type').val();
+            var occupationInput = document.getElementById("occupation");
 
             $('#dept, #yr_lvl, #teacher_major').val('').removeAttr('required');
 
@@ -386,15 +387,24 @@
 
                 $('#teacherMajorGroup').hide();
                 $('#teacher_major').removeAttr('required');
+
+                occupationInput.value = "Student";
+                occupationInput.readOnly = true;
             } else if (userType === 'Teacher') {
                 $('#deptGroup, #yrLvlGroup').hide();
                 $('#dept, #yr_lvl').removeAttr('required');
 
                 $('#teacherMajorGroup').show();
                 $('#teacher_major').attr('required', 'required');
+
+                occupationInput.value = "";
+                occupationInput.readOnly = false;
             } else {
                 $('#deptGroup, #yrLvlGroup, #teacherMajorGroup').hide();
             }
         }
+
+
+      
     });
 </script>

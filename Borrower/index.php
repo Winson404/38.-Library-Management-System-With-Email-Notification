@@ -5,7 +5,8 @@ include 'header.php';
 ?>
 
 <script src="../plugins/jquery/jquery.min.js"></script>
-<div class="content-wrapper">
+<div class="content p-2">
+<!-- <div class="content-wrapper">
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
@@ -20,7 +21,7 @@ include 'header.php';
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 <?php
 
 if (isset($_GET['book_title'])) {
