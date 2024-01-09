@@ -80,13 +80,6 @@ require_once 'sidebar.php';
                   while ($row = mysqli_fetch_array($sql)) {
                     $borrower_type = $row['user_type'];
                     $user_Id = $row['user_ID'];
-                    $view_borrower_link = '';
-
-                    if ($borrower_type == 'Student') {
-                        $view_borrower_link = 'students_view.php?user_Id=' . $user_Id;
-                    } else {
-                        $view_borrower_link = 'teachers_view.php?user_Id=' . $user_Id;
-                    }
                   ?>
                   <tr>
                     <td><?php echo $row['call_num']; ?></td>
@@ -110,7 +103,7 @@ require_once 'sidebar.php';
                     <td>
                       <button type="button" class="btn bg-success btn-sm" data-toggle="modal" data-target="#update<?php echo $row['borrow_ID']; ?>"><i class="fas fa-pencil"></i> Update</button>
                       <button type="button" class="btn bg-primary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['borrow_ID']; ?>"><i class="fas fa-info-circle"></i> Book</button>
-                      <a type="button" class="btn bg-info btn-sm" href="<?= $view_borrower_link ?>"><i class="fas fa-info-circle"></i> Borrower</a>
+                      <a type="button" class="btn bg-info btn-sm" href="borrower_profile.php?user_Id=<?php echo $row['user_ID']; ?>"><i class="fas fa-info-circle"></i> Borrower</a>
                     </td>
                   </tr>
                   <!-- VIEW -->
